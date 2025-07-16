@@ -1,0 +1,30 @@
+return {
+  'github/copilot.vim',
+  -- last longer to initialize
+  event = 'VeryLazy',
+  --[[
+  --allow copilot to work with all filetypes
+A list of "workspace folders" or project roots that
+Copilot may use to improve the quality of suggestions.
+vim.g.copilot_workspace_folders = ["~/Projects/myproject"]
+You can also set b:workspace_folder for an individual
+buffer and newly seen values will be added
+automatically.
+]]
+  -- Set the workspace folder for the current buffer
+  -- vim.b.workspace_folder = '~/Projects/myproject',
+  -- Set the workspace folders globally
+  -- vim.g.copilot_workspace_folders = { '~/Projects/myproject' },
+  config = function()
+    vim.g.copilot_filetypes = {
+      ['*'] = true, -- Enable Copilot for all file types
+    }
+    vim.g.copilot_no_tab_map = true -- Disable default tab mapping
+    vim.g.copilot_assume_mapped = true
+    -- vim.g.copilot_filetypes = { ['*'] = true }
+    vim.cmd [[imap <silent><expr> <M-l> copilot#AcceptWord()]]
+    vim.cmd [[imap <silent><expr> <C-l> copilot#AcceptLine()]]
+    vim.cmd [[imap <silent><expr> <M-L> copilot#Accept()]]
+    vim.api.nvim_set_keymap('i', '<C-\\>', 'copilot#Dismiss()', { expr = true, silent = true })
+  end,
+}

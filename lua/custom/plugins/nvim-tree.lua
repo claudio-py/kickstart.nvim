@@ -6,12 +6,12 @@ return {
 
   config = function()
     -- Toggle nvim-tree
-    vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>te', ':NvimTreeToggle<CR>',--[[ { noremap = true, silent = true },]] { desc = 'NvimTree' })
 
     require('nvim-tree').setup {
       view = {
         width = 30,
-        side = 'left',
+        side = 'right',
         preserve_window_proportions = true,
       },
       renderer = {
@@ -19,11 +19,11 @@ return {
       },
       actions = {
         open_file = {
-          quit_on_open = true,
+          quit_on_open = false,
         },
       },
       filters = {
-        dotfiles = false,
+        dotfiles = true,
       },
       git = {
         enable = true,
